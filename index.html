@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Validation</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>    
+</head>
+<body>
+    
+    <label for="">Previous Dateblock</label>
+    <input type="date" id="date">
+
+    <label for="">After Today Dateblock</label>
+    <input type="date" name="" id="afterdateBlock">
+
+    <div>
+        <label for="">Startdate</label>
+        <input type="text" name="" id="startDate">
+        <label for="">Enddate</label>
+        <input type="text" name="" id="endDate">
+    </div>
+
+
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+    
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#date').attr('min',today);
+    </script>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+    
+        console.log(`Today ${today}, day ${dd}, month ${mm} , year ${yyyy}`);
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#afterdateBlock').attr('max',today);
+    </script>
+    <script>
+        var startDate;
+        var endDate;
+        
+        $("#startDate").datepicker({
+        });
+
+        $("#endDate").datepicker();
+
+        $("#startDate").change(()=>{
+            startDate = $("#startDate").datepicker( "option", "dateFormat" );
+            console.log(startDate);
+            $("#endDate").datepicker('option','minDate',startDate);
+        })
+        $("#endDate").change(()=>{
+            endDate = $(this).datepicker('getDate');
+            $("#startDate").datepicker('option','maxDate',endDate);
+        })
+    </script>
+</body>
+</html>
